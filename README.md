@@ -3,6 +3,12 @@ Agriculture
 
 Agriculture add-on for Treefarm.
 
+Copyright Stuff
+---------------
+This mod uses fragments of code from both Treefarm and Test Mode, and some altered placeholder graphics from Factorio itself.  These fragments have been marked.
+
+All other code is licensed under the MIT Open Source License.
+
 Requirements
 ------------
 

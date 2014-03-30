@@ -6,7 +6,7 @@ data:extend({
     flags = {"goes-to-quickbar"},
     subgroup = "production-machine",
     order = "a[ag-controller]",
-    place_result = "ag-controller",
+    place_result = "ag-controller-overlay",
     stack_size = 8
   },
 })

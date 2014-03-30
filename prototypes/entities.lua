@@ -4,6 +4,7 @@ data:extend({
 	{
 		type = "smart-container",
 		name = "ag-controller",
+		order="a[ag-controller]",
 		icon = "__Agriculture__/graphics/items/ag-controller.png",
 		flags = {"placeable-neutral", "player-creation"},
 		minable = {mining_time = 1,result = "ag-controller"},
@@ -26,6 +27,26 @@ data:extend({
 		  emissions = 0.01 / 2.5
 		},
 		energy_usage = "30kW",
+	},
+	-- Concept stolen from Treefarm.
+	{
+		type = "smart-container",
+		name = "ag-controller-overlay",
+		order="d[remnants]-c[wall]",
+		icon = "__Agriculture__/graphics/items/ag-controller.png",
+		flags = {"placeable-neutral", "player-creation"},
+		minable = {mining_time = 1,result = "ag-controller"},
+		max_health = 1,
+		collision_box = {{-0.9, -0.9}, {0.9, 0.9}},
+		selection_box = {{-1, -1}, {1, 1}},
+		inventory_size = 1,
+		picture = {
+			filename = "__Agriculture__/graphics/entity/ag-controller-overlay.png",
+			priority = "extra-high",
+			width = 640,
+			height = 640,
+			shift = {0.0, 0.0}
+		}
 	},
 	-- Used for checking whether a tree placement is too close to something.
 	-- And no, canplace{"green-tree"} doesn't work, for whatever reason
