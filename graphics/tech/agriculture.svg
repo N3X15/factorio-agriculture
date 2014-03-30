@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg5294"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   inkscape:export-filename="C:\Users\Rob\AppData\Roaming\Factorio\mods\Agriculture\graphics\tech\agriculture.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   sodipodi:docname="New document 5">
+  <defs
+     id="defs5296">
+    <linearGradient
+       id="linearGradient5839">
+      <stop
+         style="stop-color:#006f00;stop-opacity:1"
+         offset="0"
+         id="stop5841" />
+      <stop
+         style="stop-color:#00aa00;stop-opacity:1;"
+         offset="1"
+         id="stop5843" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5831">
+      <stop
+         style="stop-color:#0def00;stop-opacity:1;"
+         offset="0"
+         id="stop5833" />
+      <stop
+         style="stop-color:#006400;stop-opacity:1;"
+         offset="1"
+         id="stop5835" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="113.15852"
+     inkscape:cy="16.507291"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5299">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <path
+       style="fill:#006f00;fill-opacity:1;stroke:none"
+       d="m 25.801595,47.079981 c 6.356877,9.990018 6.072261,13.387839 4.93851,17.279772 l 7.76052,-0.21333 C 41.384345,59.168711 39.584299,54.209804 34.973117,49.213286 13.710035,26.173341 37.851879,16.670945 37.089622,1.4272485 36.571532,12.391689 10.291743,22.705795 25.801595,47.079981 z"
+       id="path5863"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sccscs" />
+    <path
+       style="fill:#006f00;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-opacity:1"
+       d="m 46.914828,21.701661 c 10.113094,14.44944 12.698529,45.948449 -6.719222,35.35841 -19.417752,-10.59004 4.948526,-18.446885 6.719222,-35.35841 z"
+       id="path5321"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="czc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       d="m 40.610857,57.198017 c 0,0 7.736884,-7.227517 6.527581,-14.34874 -0.625877,6.62322 -8.357055,13.942903 -8.229568,13.500641 z"
+       id="path5857"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       sodipodi:nodetypes="czc"
+       inkscape:connector-curvature="0"
+       id="path5859"
+       d="M 18.381616,0.14024747 C 8.7189974,10.825841 3.3875354,36.088103 20.175193,29.470866 36.962851,22.853628 18.072873,14.022801 18.381616,0.14024747 z"
+       style="fill:#006f00;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path5861"
+       d="m 19.825296,29.540646 c 0,0 -5.511014,-6.638987 -3.800587,-12.28703 -0.175564,5.430119 5.321352,12.143211 5.263797,11.771951 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:none" />
+  </g>
+</svg>

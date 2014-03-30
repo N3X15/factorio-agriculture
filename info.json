@@ -1,0 +1,12 @@
+{
+  "name": "Agriculture",
+  "version": "0.0.1",
+  "title": "Agriculture",
+  "author": "N3X15, drs",
+  "homepage": "http://www.factorioforums.com/forum/viewtopic.php?f=14&t=522",
+  "dependencies": [
+    "base >= 0.9.2",
+    "Treefarm-Mod >= 0.9.1"
+  ],
+  "description": "This mod adds agriculture controllers to the Treefarm mod."
+}
