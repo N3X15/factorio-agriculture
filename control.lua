@@ -9,7 +9,7 @@ TREETYPES = {
 	"dark-green-tree"
 }
 
-CONTROLLER_RADIUS=7
+CONTROLLER_RADIUS=10 -- 7
 
 game.oninit(function()
 	initTables()
@@ -74,22 +74,23 @@ game.onevent(defines.events.onputitem, function(event)
 	if isHolding({name="ag-controller", count=1}) then
 		local selectedEnt = game.player.selected
 		if selectedEnt and selectedEnt.valid and selectedEnt.name == "ag-controller" then
-			for k, zone in pairs(glob.agriculture.zones) do
-				if zone.controller.valid and zone.controller.equals(selectedEnt) then
-					openZoneSettings(zone)
-					return
-				end
-			end
-			createZoneFor(selectedEnt)
-			for k, zone in pairs(glob.agriculture.zones) do
-				if zone.controller.valid and zone.controller.equals(selectedEnt) then
-					openZoneSettings(zone)
-					return
-				end
+			if not openZoneSettingsFor(selectedEnt) then
+				createZoneFor(selectedEnt)
+				openZoneSettingsFor(selectedEnt)
 			end
 		end
 	end
 end)
+
+function openZoneSettingsFor(entity)
+	for k, zone in pairs(glob.agriculture.zones) do
+		if zone.controller.valid and zone.controller.equals(entity) then
+			openZoneSettings(zone)
+			return true
+		end
+	end
+	return false
+end
 
 game.onevent(defines.events.onguiclick, function(event)
 	local context = glob.agriculture.context
@@ -121,7 +122,7 @@ game.onevent(defines.events.onguiclick, function(event)
 		if context.typepref ~= nil then
 			local trees = game.findentitiesfiltered{area = context.bbox, type="tree"}
 			for _, tree in pairs(trees) do
-				if tree.valid and detectTreeStatus(tree) == 5 and tree.name ~= context.typepref and not tree.tobedeconstructed(game.player.force) then
+				if tree.valid and not tree.tobedeconstructed(game.player.force) then
 					tree.orderdeconstruction(game.player.force)
 				end
 			end
@@ -140,6 +141,7 @@ end)
 function closeZoneSettings()
 	gui = game.player.gui.center
 	if glob.agriculture.context ~= nil then
+		--glob.agriculture.context:rebuildZoneMap()
 		glob.agriculture.context.stop=false
 	end
 	glob.agriculture.context=nil
@@ -198,10 +200,81 @@ function createZoneFor(entity)
 			{x = entity.position.x - CONTROLLER_RADIUS, y = entity.position.y - CONTROLLER_RADIUS},
 			{x = entity.position.x + CONTROLLER_RADIUS, y = entity.position.y + CONTROLLER_RADIUS}
 		},
+		map = {},
 		deforest = false,
 		replant = false,
 		typepref = nil,
-		stop = false
+		stop = false,
+		
+		checkTreePlacement = function(self,x,y)
+			for yo = -1,1 do
+				for xo = -1,1 do
+					local idx = self:getidx(x+xo,y+yo)
+					local val = map[idx]
+					if idx~=nil then
+						-- Obstacle
+						if val == 1 then
+							return false
+						end
+						-- Trees cannot be next to each other.
+						if not (math.abs(x)==1 and math.abs(y)==1) then
+							if val == 2 then
+								return false
+							end
+						end
+					end
+				end
+			end
+			return true
+		end,
+		
+		setTreePlanted = function(self,x,y)
+			for yo = -1,1 do
+				for xo = -1,1 do
+					local idx = self:getidx(x,y)
+					if idx~=nil then
+						if map[idx] == 0 then
+							map[idx] = 2
+						end
+					end
+				end
+			end
+		end,
+		
+		rebuildMap = function(self)
+			self.map={}
+			for y = 0,CONTROLLER_RADIUS*2 do
+				for x = 0,CONTROLLER_RADIUS*2 do
+					table.insert(self.map,0)
+				end
+			end
+			for y = 0,CONTROLLER_RADIUS*2 do
+				for x = 0,CONTROLLER_RADIUS*2 do
+					local names = detectObstaclesAt({
+						x=(x+self.controller.position.x - CONTROLLER_RADIUS),
+						y=(y+self.controller.position.y - CONTROLLER_RADIUS),
+					}, 0.5)
+					if #names > 0 then
+						for yo = -1,1 do
+							for xo = -1,1 do
+								local idx = self:getidx(x,y)
+								if idx~=nil and map[idx] > 0 then
+									map[idx] = 1
+								end
+							end
+						end
+					end
+				end
+			end
+		end,
+		
+		getidx = function(self,x,y)
+			local i = y + (x*((CONTROLLER_RADIUS*2)))
+			if i < 0 or i > (CONTROLLER_RADIUS*2) then
+				return nil
+			end
+			return i + 1
+		end
 	}
 	local efficiency = {
 		calcEfficiency({x = newzone.bbox[1].x, y = newzone.bbox[1].y}),
@@ -243,10 +316,13 @@ function detectTreeStatus(entity)
 				return 5
 	end
 end
-function detectObstaclesAt(pos)
+function detectObstaclesAt(pos, radius)
+	if radius == nil then
+		radius = 1
+	end
 	local detected = game.findentities{
-		{pos.x-1,pos.y-1},
-		{pos.x+1,pos.y+1}
+		{pos.x-radius,pos.y-radius},
+		{pos.x+radius,pos.y+radius}
 	}
 	local ignore_names={
 		"smoke",
@@ -296,8 +372,8 @@ game.onevent(defines.events.ontick, function(event)
 							obstacles = detectObstaclesAt(treeposition)
 							if #obstacles == 0 then
 								if #growntrees < 40 and zone.replant and zone.controller.getitemcount("seeds") > 0 then
-									--game.createentity{name = "big-tree", position = treeposition}
-									if game.canplaceentity{name="lab", position = treeposition} then
+									--if game.canplaceentity{name="lab", position = treeposition} then -- 3x3
+									if game.canplaceentity{name="ag-collider", position = treeposition} then -- 2x2ish
 										zone.controller.getinventory(1).remove{name = "seeds", count = 1}
 										addTreeToFarm(treeposition,1,zone.typepref)
 										--game.player.print("Added germling at pos "..serpent.dump(treeposition))
